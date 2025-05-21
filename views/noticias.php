@@ -6,6 +6,11 @@
         <?php
         $conn = connectDB();
         
+        
+        if ($conn->connect_error) {
+            echo '<div class="alert alert-danger">Error de conexión: ' . $conn->connect_error . '</div>';
+        }
+        
         if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             $id = $_GET['id'];
             
@@ -55,30 +60,36 @@
                     FROM noticias n 
                     INNER JOIN users_data u ON n.idUser = u.idUser 
                     ORDER BY n.fecha DESC";
-            
             $result = $conn->query($sql);
             
-            if ($result && $result->num_rows > 0) {
-                echo '<div class="news-grid">';
-                
-                while ($row = $result->fetch_assoc()) {
-                    ?>
-                    <div class="news-card">
-                        <img src="<?php echo $row['imagen']; ?>" alt="<?php echo $row['titulo']; ?>">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $row['titulo']; ?></h5>
-                            <p class="news-date"><?php echo date('d/m/Y', strtotime($row['fecha'])); ?></p>
-                            <p class="card-text"><?php echo substr($row['texto'], 0, 150); ?>...</p>
-                            <p class="news-author">Por: <?php echo $row['nombre'] . ' ' . $row['apellidos']; ?></p>
-                            <a href="index.php?page=noticias&id=<?php echo $row['idNoticia']; ?>" class="btn">Leer más</a>
-                        </div>
-                    </div>
-                    <?php
-                }
-                
-                echo '</div>';
+            if (!$result) {
+                echo '<div class="alert alert-danger">Error en la consulta: ' . $conn->error . '</div>';
             } else {
-                echo '<div class="text-center">No hay noticias disponibles en este momento.</div>';
+                
+                if ($result->num_rows > 0) {
+                    echo '<div class="news-grid">';
+                    
+                    while ($row = $result->fetch_assoc()) {
+                        //  Mostrar los datos de cada noticia
+                        echo "<!-- Noticia: " . print_r($row, true) . " -->";
+                        ?>
+                        <div class="news-card">
+                            <img src="<?php echo htmlspecialchars($row['imagen']); ?>" alt="<?php echo htmlspecialchars($row['titulo']); ?>">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo htmlspecialchars($row['titulo']); ?></h5>
+                                <p class="news-date"><?php echo date('d/m/Y', strtotime($row['fecha'])); ?></p>
+                                <p class="card-text"><?php echo htmlspecialchars(substr($row['texto'], 0, 150)); ?>...</p>
+                                <p class="news-author">Por: <?php echo htmlspecialchars($row['nombre'] . ' ' . $row['apellidos']); ?></p>
+                                <a href="index.php?page=noticias&id=<?php echo $row['idNoticia']; ?>" class="btn">Leer más</a>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    
+                    echo '</div>';
+                } else {
+                    echo '<div class="text-center">No hay noticias disponibles en este momento.</div>';
+                }
             }
         }
         

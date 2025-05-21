@@ -31,7 +31,7 @@
         </div>
         <div class="doctores page-transition delay-2">
             <div class="doctor">
-                <img class="img-doctor" src="./assets/img/doctores(1).png" alt="Retrato de persona" width="400"
+                <img class="img-doctor" src="./assets/img/doctores1.png" alt="Retrato de persona" width="400"
                     height="500">
                 <div class="doctor-section">
                     <h3>Dr. Sebastian Carranza</h3>
@@ -54,7 +54,7 @@
                         Máster de Endodoncia, Southern Mississippi University (USM).</p>
                     <a href="index.php?page=especialidad&doctor=2" class="btn btn-blue btn-lg">VER ESPECIALIDAD</a>
                 </div>
-                <img class="img-doctor" src="./assets/img/doctores(2).png" alt="Retrato de persona" width="400"
+                <img class="img-doctor" src="./assets/img/doctores2.png" alt="Retrato de persona" width="400"
                     height="500">
             </div>
         </div>
@@ -110,7 +110,7 @@
         <div class="card-title animate-on-scroll">
             <h2>¿Por qué elegirnos?</h2>
         </div>
-        <div class="row">
+        <div class="row-1">
             <div class="col-6">
                 <div class="feature animate-on-scroll">
                     <div class="feature-icon">
@@ -168,7 +168,7 @@
             <h2>Nuestras <strong>Instalaciones</strong></h2>
         </div>
 
-        <div class="row">
+        <div class="row-2">
             <div class="col-6">
                 <div class="instalaciones-text animate-on-scroll">
                     <h3>Tecnología de vanguardia</h3>

@@ -13,7 +13,7 @@
                         $imagen = trim($_POST['imagen']);
                         $texto = trim($_POST['texto']);
                         $fecha = $_POST['fecha'];
-                        $idUser = $_SESSION['user_id']; // El admin actual es el autor
+                        $idUser = $_SESSION['user_id']; 
                         
                         // Validar datos
                         if (empty($titulo) || empty($imagen) || empty($texto) || empty($fecha)) {
